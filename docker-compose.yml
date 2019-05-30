@@ -61,6 +61,8 @@ services:
       # Where our data will be persisted
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./.my.cnf:/root/.my.cnf:ro
+
 # Names our volume
 volumes:
   my-db:
