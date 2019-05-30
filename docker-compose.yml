@@ -34,6 +34,7 @@ services:
       - GF_DATABASE_PASSWORD=password
       - GF_ALERTING_EXECUTE_ALERTS=false
       - GF_INSTALL_PLUGINS=ayoungprogrammer-finance-datasource,briangann-datatable-panel,btplc-status-dot-panel,btplc-trend-box-panel,grafana-clock-panel,grafana-piechart-panel,grafana-simple-json-datasource,jdbranham-diagram-panel,natel-discrete-panel,natel-plotly-panel,petrslavotinek-carpetplot-panel,raintank-worldping-app,ryantxu-ajax-panel,vertamedia-clickhouse-datasource,vonage-status-panel
+      - GF_SERVER_DOMAIN=grafana-tbd.wixpress.com
     networks:
       - back-tier
       - front-tier
