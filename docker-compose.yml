@@ -1,0 +1,67 @@
+version: '3.1'
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+
+networks:
+  front-tier:
+  back-tier:
+
+
+
+services:
+  grafana:
+    image: grafana/grafana:6.2.1
+    # user: "104"
+    depends_on:
+      - mysql
+    ports:
+      - 3000:3000
+    expose:
+      - '3000'
+    volumes:
+      - ./graf:/var/lib/grafana
+    #   - ./grafana/provisioning/:/etc/grafana/provisioning/
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=foobar
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_DATABASE_TYPE=mysql
+      - GF_DATABASE_HOST=mysql:3306
+      - GF_DATABASE_NAME=grafana_db
+      - GF_DATABASE_USER=gr_rw
+      - GF_DATABASE_PASSWORD=password
+      - GF_ALERTING_EXECUTE_ALERTS=false
+      - GF_INSTALL_PLUGINS=ayoungprogrammer-finance-datasource,briangann-datatable-panel,btplc-status-dot-panel,btplc-trend-box-panel,grafana-clock-panel,grafana-piechart-panel,grafana-simple-json-datasource,jdbranham-diagram-panel,natel-discrete-panel,natel-plotly-panel,petrslavotinek-carpetplot-panel,raintank-worldping-app,ryantxu-ajax-panel,vertamedia-clickhouse-datasource,vonage-status-panel
+    networks:
+      - back-tier
+      - front-tier
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    networks:
+      - back-tier
+    environment:
+      MYSQL_DATABASE: 'grafana_db'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'gr_rw'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+     - '3306'
+      # Where our data will be persisted
+    volumes:
+      - ./mysql:/var/lib/mysql
+# Names our volume
+volumes:
+  my-db:
+  grafana_data:
