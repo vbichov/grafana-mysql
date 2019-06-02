@@ -1,0 +1,30 @@
+{
+    "type": "datasource",
+    "name": "Presto",
+    "id": "wix-presto-datasource",
+
+    "info": {
+        "description": "Presto REST API datasource",
+        "author": {
+            "name": "WIX",
+            "url": "https://wix.com"
+        },
+        "keywords": ["presto", "datasource", "plugin"],
+        "logos": {
+            "small": "http://www.userlogos.org/files/logos/MShadows/wix1.png",
+            "large": "http://www.userlogos.org/files/logos/MShadows/wix1.png"
+        },
+        "links": [
+            { "name": "Preso REST API", "url": "https://github.com/prestodb/presto/wiki/HTTP-Protocol" }
+        ],
+        "version": "0.0.1",
+        "updated": "2018 June, 06"
+    },
+    "dependencies": {
+        "grafanaVersion": "4.5.x",
+        "plugins": []
+    },
+
+    "metrics": true,
+    "annotations": false
+}
